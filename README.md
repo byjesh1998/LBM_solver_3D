@@ -486,3 +486,24 @@ lower $Re$ is reached by increasing τ or decreasing $B_1$, at the cost of longe
 ## License
 
 Add a license of your choice (e.g. MIT) as `LICENSE` before publishing.
+
+
+
+
+             ┌───────────────-┐
+             │ f distributions│
+             └───────┬───────-┘
+                     ↓
+             calculate rho, u
+                     ↓
+                 collision
+                     ↓
+                 streaming
+                     ↓
+           ┌─────────┴─────────┐
+           ↓                   ↓
+        fluid cell          solid cell
+           ↓                   ↓
+      move normally       bounce back
+                               ↓
+                         force/torque
