@@ -1,0 +1,8 @@
+steps 16000
+converged 1
+nu 0.1
+mean_density 1
+max_speed 0.03764989122
+wall_force 0.2048 -1.401656569e-15 1.136868377e-13
+body_force_total 0.2048 0 0
+l2_error 0.0002105303768

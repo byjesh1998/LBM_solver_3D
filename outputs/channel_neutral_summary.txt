@@ -1,0 +1,8 @@
+steps 60000
+converged 0
+nu 0.1666666667
+mean_density 1.000002592
+max_speed 0.006822940873
+wall_force 0.002439670333 -0.02823319455 -3.693909421e-09
+body_force_total 0 0 0
+contacts 745
