@@ -507,3 +507,23 @@ Add a license of your choice (e.g. MIT) as `LICENSE` before publishing.
       move normally       bounce back
                                ↓
                          force/torque
+
+
+
+
+
+
+                         LBM
+                          │
+       ┌──────────────────┼──────────────────┐
+       │                  │                  │
+     FLUID             BOUNDARIES         PARTICLE
+       │                  │                  │
+       ↓                  ↓                  ↓
+   f, rho, u          flag, wallForce       sq
+       │                  │                  │
+       └──────────────┬───┴──────────────────┘
+                      ↓
+                    step()
+                      ↓
+              fluid-particle coupling
