@@ -387,6 +387,48 @@ def plot_squirmer_model(cases, R, B1, half_width=14.0, path=None):
     return fig, axis_errors
 
 
+# def plot_trajectories(runs, ny, R, U0, title=None, path=None):
+#     """Trajectories in the channel, lateral position and orientation vs time.
+
+#     runs: list of (traj_dict, label, color).
+#     """
+#     import matplotlib.pyplot as plt
+#     H = ny - 2
+#     yc, ylo, yhi = 0.5 * (ny - 1), 0.5, ny - 1.5
+#     fig = plt.figure(figsize=(13, 3.2 + 2.6 * (len(runs) + 2)))
+#     gs = fig.add_gridspec(len(runs) + 2, 1, hspace=.55)
+#     for k, (tr, lab, col) in enumerate(runs):
+#         ax = fig.add_subplot(gs[k])
+#         ax.axhspan(ylo - 3, ylo, color=".7"); ax.axhspan(yhi, yhi + 3, color=".7")
+#         ax.axhline(yc, ls=":", c="k", lw=.8)
+#         x = tr["X"] - tr["X"][0]
+#         ax.plot(x, tr["Y"], c=col, lw=1.4)
+#         j = np.linspace(0, len(x) - 1, 30).astype(int)
+#         ax.quiver(x[j], tr["Y"][j], tr["ex"][j], tr["ey"][j], angles="xy", scale=40, width=.0025, color="k")
+#         ax.set(ylim=(ylo - 2, yhi + 2), xlim=(-10, x[-1] + 10), ylabel="y",
+#                title=f"{lab}: trajectory (y stretched; arrows = swimming direction)")
+#     ax1 = fig.add_subplot(gs[-2]); ax2 = fig.add_subplot(gs[-1], sharex=ax1)
+#     for tr, lab, col in runs:
+#         T = tr["t"] * U0 / H
+#         ax1.plot(T, (tr["Y"] - yc) / (0.5 * H - R), c=col, label=lab)
+#         ax2.plot(T, tr["angle"], c=col, label=lab)
+#     for s in (-1, 1):
+#         ax1.axhline(s, c=".5", ls="--", lw=.8)
+#     ax1.set(ylabel=r"$(y-y_c)/(H/2-R)$", ylim=(-1.15, 1.15), title="Lateral position (±1 = touching a wall)")
+#     ax2.axhline(0, c="k", lw=.6)
+#     ax2.set(ylabel="orientation [deg]", xlabel=r"time $tU_0/H$", title="Swimming direction")
+#     for ax in (ax1, ax2):
+#         ax.grid(alpha=.3); ax.legend(fontsize=8, loc="upper right")
+#     if title:
+#         fig.suptitle(title, fontsize=12)
+#     if path:
+#         fig.savefig(path, dpi=120, bbox_inches="tight")
+#     return fig
+
+
+
+
+    #######
 def plot_trajectories(runs, ny, R, U0, title=None, path=None):
     """Trajectories in the channel, lateral position and orientation vs time.
 
@@ -399,12 +441,12 @@ def plot_trajectories(runs, ny, R, U0, title=None, path=None):
     gs = fig.add_gridspec(len(runs) + 2, 1, hspace=.55)
     for k, (tr, lab, col) in enumerate(runs):
         ax = fig.add_subplot(gs[k])
-        ax.axhspan(ylo - 3, ylo, color=".7"); ax.axhspan(yhi, yhi + 3, color=".7")
+        ax.axhspan(ylo - 3, ylo, color=".5"); ax.axhspan(yhi, yhi + 3, color=".7")
         ax.axhline(yc, ls=":", c="k", lw=.8)
         x = tr["X"] - tr["X"][0]
-        ax.plot(x, tr["Y"], c=col, lw=1.4)
+        ax.plot(x, tr["Y"], c=col, lw=3.4)
         j = np.linspace(0, len(x) - 1, 30).astype(int)
-        ax.quiver(x[j], tr["Y"][j], tr["ex"][j], tr["ey"][j], angles="xy", scale=40, width=.0025, color="k")
+        ax.quiver(x[j], tr["Y"][j], tr["ex"][j], tr["ey"][j], angles="xy", scale=10, width=.0025, color="k")
         ax.set(ylim=(ylo - 2, yhi + 2), xlim=(-10, x[-1] + 10), ylabel="y",
                title=f"{lab}: trajectory (y stretched; arrows = swimming direction)")
     ax1 = fig.add_subplot(gs[-2]); ax2 = fig.add_subplot(gs[-1], sharex=ax1)
@@ -424,3 +466,4 @@ def plot_trajectories(runs, ny, R, U0, title=None, path=None):
     if path:
         fig.savefig(path, dpi=120, bbox_inches="tight")
     return fig
+
