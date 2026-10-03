@@ -5,7 +5,7 @@ fully resolved, self-propelled **spherical squirmer**. It is designed to study t
 model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
 
 <p align="center">
-  <img src="docs/figures/neutral_squirmer_channel.png" width="85%"><br>
+  <img src="docs/figures/pusher.png" width="85%"><br>
   <em>A neutral squirmer oscillating between the walls of a slit channel.</em>
 </p>
 
