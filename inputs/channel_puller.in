@@ -5,22 +5,22 @@
 # Expected: damped oscillation decaying towards the centreline.
 # ---------------------------------------------------------------------------
 nx = 64
-ny = 34
-nz = 32
+ny = 32
+nz = 20
 tau = 1.0
 walls_y = 1
 walls_z = 0
 squirmer = 1
 radius = 4
 b1 = 0.015
-beta = 1
-angle = 30
+beta = 3
+angle = 40
 planar = 1             # keep the motion in the x-y plane
 eps = 0.2              # soft wall potential, max force = eps * 6 pi mu R U0
 hc = 2.0               # potential range (lattice units)
 hmin = 0.5             # hard safety gap
-steps = 90000
-print_every = 2000
+steps = 60000
+print_every = 3000
 traj_every = 50
 output_dir = outputs
 prefix = channel_puller
