@@ -1,0 +1,26 @@
+# ---------------------------------------------------------------------------
+# Pusher (beta = -3) in a slit channel: walls in y, periodic in x and z.
+# H = ny - 2 = 32, R = 4 (2R/H = 0.25), Re = 2 R U0 / nu = 0.48.
+# Starts on the centreline, 30 degrees from the x-axis (|angle| < 45 required).
+# Expected: wall-to-wall motion held off the walls mainly by the hard gap (see README).
+# ---------------------------------------------------------------------------
+nx = 64
+ny = 34
+nz = 32
+tau = 1.0
+walls_y = 1
+walls_z = 0
+squirmer = 1
+radius = 4
+b1 = 0.015
+beta = -3
+angle = 30
+planar = 1             # keep the motion in the x-y plane
+eps = 0.2              # soft wall potential, max force = eps * 6 pi mu R U0
+hc = 2.0               # potential range (lattice units)
+hmin = 0.5             # hard safety gap
+steps = 30000
+print_every = 2000
+traj_every = 50
+output_dir = outputs
+prefix = channel_pusher

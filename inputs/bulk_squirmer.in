@@ -1,0 +1,21 @@
+# ---------------------------------------------------------------------------
+# Single squirmer in a fully periodic box (no walls): swimming speed and
+# flow field are compared with the unbounded Blake solution.
+# ---------------------------------------------------------------------------
+nx = 48
+ny = 48
+nz = 48
+tau = 1.0
+walls_y = 0
+walls_z = 0
+squirmer = 1
+radius = 4
+b1 = 0.015             # U0 = 2 B1 / 3 = 0.01
+beta = 0               # -3 pusher, 0 neutral, +3 puller
+angle = 0
+planar = 1
+steps = 3000
+print_every = 500
+traj_every = 10
+output_dir = outputs
+prefix = bulk

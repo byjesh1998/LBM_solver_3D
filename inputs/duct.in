@@ -1,0 +1,19 @@
+# ---------------------------------------------------------------------------
+# Pressure-driven flow in a square duct (walls in y and z), no squirmer.
+# Validates the fluid solver against the exact series solution.
+# Channel width H = ny - 2 = 32, force density fx drives the flow along x.
+# x is periodic and the flow is x-invariant, so a short domain (nx = 4) suffices.
+# ---------------------------------------------------------------------------
+nx = 4
+ny = 34
+nz = 34
+tau = 0.8
+fx = 5e-5
+walls_y = 1
+walls_z = 1
+squirmer = 0
+steps = 100000
+tol = 1e-12            # stop at steady state
+print_every = 1000
+output_dir = outputs
+prefix = duct
