@@ -27,12 +27,16 @@ The code uses a D3Q19 lattice, TRT collision, no-slip walls, and a fully resolve
 ---
 
 ## Contents
+
+<div align="center"> 
+  
 |1. [`Start running the simulation`](#1-start-running-the-simulation) | 2. [`Repository layout`](#2-repository-layout) |3. [`Theory and numerical method`](#3-theory-and-numerical-method)|
 |---|---|---|
 |4.[`Input file reference`](#4-input-file-reference) |5. [`Output files`](#5-output-files) |6. [`Validation`](#6-validation) |
 |7. [`Tests`](#7-tests) | 8. [`Tutorial notebook`](#8-tutorial-notebook) |9. [`Units and dimensionless numbers`](#9-units-and-dimensionless-numbers) |
 |10. [`Limitations and known issues`](#10-limitations-and-known-issues) | 11. [`References`](#11-references)| |
 
+</div>
 
 ---
 
