@@ -11,23 +11,20 @@ model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
   <em>Trajectories of different squirmer between the walls of a slit channel; Orientations of squirmer are colour coded.</em>
 </p>
 
-**Features**
+
+## `Features`
 
 - D3Q19 lattice, two-relaxation-time (TRT) collision with the "magic" parameter Λ = 3/16
 - Guo body forcing (pressure-driven background flow)
 - No-slip walls in y and/or z (halfway bounce-back); x is always periodic
 - Squirmer with the Blake/Lighthill two-mode slip velocity (parameter β selects pusher, neutral or puller)
-- Moving-boundary bounce-back, Galilean-invariant momentum exchange, node covering/uncovering corrections
-- Newton–Euler particle dynamics, optional restriction to planar (x-y) motion
 - Weak, smooth wall potential with a hard safety gap
 - Validated: duct flow to second-order accuracy, bulk swimming speed and near-field flow vs. Blake's solution
 - OpenMP parallel; binary VTK output for ParaView
 
----
 
 ## Contents
-
-1. [Quick start](#1-quick-start)
+1. [Start running the simulation](#1-start-running-the-simulation)
 2. [Repository layout](#2-repository-layout)
 3. [Theory and numerical method](#3-theory-and-numerical-method)
 4. [Input file reference](#4-input-file-reference)
@@ -41,7 +38,7 @@ model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
 
 ---
 
-## 1. Quick start
+## 1. Start running the simulation
 
 Requirements: a C++17 compiler (GCC ≥ 9 or Clang ≥ 10), optionally OpenMP. For post-processing,
 tests and the notebook you also need Python ≥ 3.9 with `numpy`, `scipy`, `matplotlib`, `pytest` and `jupyter`.
