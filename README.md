@@ -100,11 +100,11 @@ LBM_solver_3D/
 
 ---
 
-## 3. Theory and numerical method
+## $\color{purple}{\text{3. Theory and numerical method}}$
 
-All quantities are in **lattice units**: $\Delta x = \Delta t = 1$, reference density $\rho_0 = 1$.
+All quantities described in simulations are in **lattice units**: $\Delta x = \Delta t = 1$, reference density $\rho_0 = 1$.
 
-### 3.1 Lattice Boltzmann equation
+### $\color{purple}{\text{3.1 Lattice Boltzmann equation}}$
 
 The fluid is described by particle distribution functions $f_i(\mathbf x, t)$ moving with discrete
 velocities $\mathbf c_i$, $i = 0,\dots,18$ (D3Q19):
@@ -112,6 +112,8 @@ velocities $\mathbf c_i$, $i = 0,\dots,18$ (D3Q19):
 $$
 f_i(\mathbf x + \mathbf c_i, t+1) = f_i(\mathbf x, t) + \Omega_i(\mathbf x,t) + S_i(\mathbf x,t).
 $$
+
+where $\Omega_i$ is the collision operator and $S_i$ external force  term. The D3Q19 consider 19 discrete velocity points in 3D space, and each velocities $c_{i}$ weighed with weights $w_{i}$, as described in following table: 
 <table border="0">
 <tr>
 <td>
@@ -124,7 +126,6 @@ $$
 
  </td>
 <td>
-
 
  <img src="docs/figures/d3q19.png" width="75%"><br>
 
