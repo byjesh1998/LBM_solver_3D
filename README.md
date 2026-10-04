@@ -76,18 +76,18 @@ To run it in parallel, set the number of threads with `export OMP_NUM_THREADS=8`
 ## 2. Repository layout
 
 ```
-lbm-squirmer/
+LBM_solver_3D/
 ├── src/
 │   ├── main.cpp              driver: read input, time loop, output
 │   └── utils/
 │       ├── lattice.hpp       D3Q19 velocities, weights, equilibrium, node types
-│       ├── params.hpp/.cpp   parameters, input-file parser, validation
+│       ├── params.hpp/.cpp   parameters, input-file parser
 │       ├── lbm.hpp/.cpp      TRT collision + streaming + bounce-back, squirmer coupling
-│       ├── squirmer.hpp/.cpp squirmer model, rigid-body dynamics, wall potential
+│       ├── squirmer.hpp/.cpp squirmer model and parameters, rigid-body dynamics, wall potential
 │       ├── io.hpp/.cpp       VTK, trajectory and state output
 │       └── analytic.hpp/.cpp exact duct / plane Poiseuille solutions
 ├── inputs/                   ready-to-run input files (*.in)
-├── outputs/                  simulation results (git-ignored)
+├── outputs/                  simulation results (standard test results are included)
 ├── postprocessing/
 │   └── lbm_post.py           run the solver, read output, exact solutions, plots
 ├── tests/                    pytest suite (duct flow, bulk squirmer, trajectories)
