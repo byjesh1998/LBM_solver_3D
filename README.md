@@ -352,15 +352,6 @@ command line (`key=value`, overriding the file). Booleans accept `0/1`, `true/fa
 | `hc` | 2.0 | wall-potential range (lattice units) |
 | `hmin` | 0.5 | hard minimum surface-wall gap |
 
-Provided input files:
-
-| file | what it does | run time (1 core) |
-|---|---|---|
-| `inputs/duct.in` | square-duct Poiseuille flow, validation | ~10 s |
-| `inputs/bulk_squirmer.in` | squirmer in a periodic box, validation | ~50 s |
-| `inputs/channel_neutral.in` | neutral squirmer (β = 0) in a slit channel | ~11 min |
-| `inputs/channel_puller.in` | puller (β = +1) in a slit channel | ~17 min |
-| `inputs/channel_pusher.in` | pusher (β = −3) in a slit channel | ~6 min |
 
 ---
 
