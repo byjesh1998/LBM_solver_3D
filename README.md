@@ -269,11 +269,15 @@ $$
 \qquad \beta = \frac{B_2}{B_1}.
 $$
 
+<div align="center"> 
+  
 | β | swimmer | far field | propulsion |
 |---|---|---|---|
 | β < 0 | **pusher** (e.g. *E. coli*) | fluid expelled along the axis, drawn in at the sides | thrust from behind |
 | β = 0 | **neutral** (e.g. *Volvox*) | source dipole, decays as $r^{-3}$ | — |
 | β > 0 | **puller** (e.g. *Chlamydomonas*) | fluid drawn in along the axis, expelled at the sides | thrust from the front |
+
+</div>
 
 In unbounded Stokes flow the swimming speed is $\mathbf{U}_0 = \tfrac23 B_1 \mathbf e$, independent of β,
 and the lab-frame flow is (Blake 1971)
@@ -365,6 +369,8 @@ steps is reported as `contacts`.
 Input files contain `key = value` lines. The same keys are accepted on the
 command line (`key=value`, overriding the file). Booleans accept `0/1`, `true/false`, `yes/no`, `on/off`. Some important input parameters are:
 
+<div align="center">
+
 | key | default | description |
 |---|---|---|
 | `nx`, `ny`, `nz` | 64, 34, 32 | grid size (includes the wall layers) |
@@ -385,6 +391,7 @@ command line (`key=value`, overriding the file). Booleans accept `0/1`, `true/fa
 | `hc` | 2.0 | wall-potential range (lattice units) |
 | `hmin` | 0.5 | hard minimum surface-wall gap |
 
+</div>
 
 ---
 
