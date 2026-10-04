@@ -45,18 +45,11 @@ The code uses a D3Q19 lattice, TRT collision, no-slip walls, and a fully resolve
 
 ### Requirements
 
-* `C++17 compiler`
-* `GCC ≥ 9 or Clang ≥ 10`
-* `OpenMP (optional)`
+* `C++17 compiler` `GCC ≥ 9 or Clang ≥ 10` `OpenMP (optional)`
 
 For tests and post-processing:
 
-* `Python ≥ 3.9`
-* `NumPy`
-* `SciPy`
-* `Matplotlib`
-* `pytest`
-* `Jupyter`
+* `Python ≥ 3.9` `NumPy` `SciPy` `Matplotlib` `pytest` `Jupyter`
 
 ### Build
 
