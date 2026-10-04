@@ -1,8 +1,9 @@
+
 # lbm-squirmer
 
-A compact 3D **lattice Boltzmann** solver (D3Q19, TRT collision) for flow in rectangular channels, with a
-fully resolved, self-propelled **spherical squirmer**. It is designed to study the trajectories of
-model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
+A compact 3D **lattice Boltzmann (LBM)** solver for simulating a spherical microswimmer (**squirmer**) swimming in a rectangular channel.
+
+The code uses a D3Q19 lattice, TRT collision, no-slip walls, and a fully resolved spherical swimmer. It can be used to study **pushers, pullers, and neutral swimmers** near walls.
 
 <p align="center">
   <img src="docs/figures/pusher.png" width="85%"><br>
@@ -42,36 +43,82 @@ model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
 
 ## 1. Start running the simulation
 
-**Requirements:** a `C++17 compiler (GCC ≥ 9 or Clang ≥ 10)`, optionally `OpenMP`. For post-processing,
-tests: `Python ≥ 3.9` with `numpy`, `scipy`, `matplotlib`, `pytest` and `jupyter`.
+### Requirements
 
+* `C++17 compiler`
+* `GCC ≥ 9 or Clang ≥ 10`
+* `OpenMP (optional)`
+
+For tests and post-processing:
+
+* `Python ≥ 3.9`
+* `NumPy`
+* `SciPy`
+* `Matplotlib`
+* `pytest`
+* `Jupyter`
+
+### Build
 
 ```bash
 > git clone https://github.com/byjesh1998/LBM_solver_3D.git
-
 > cd LBM_solver_3D
 
-> make                                   # or: cmake -B build && cmake --build build
-# which builds bin/lbm_squirmer
-
-
-> ./bin/lbm_squirmer inputs/duct.in                 # duct flow validation 
-> ./bin/lbm_squirmer inputs/channel_neutral.in      # neutral squirmer in a channel
-> ./bin/lbm_squirmer inputs/channel_puller.in beta=2 angle=15 prefix=my_run   # override any parameter
+> make
 ```
 
-Any parameter in an input file can be overridden on the command line as `key=value` where key stands for input parameters.
-To run it in parallel, set the number of threads with `export OMP_NUM_THREADS=8`.
+Or with CMake:
 
 ```bash
-> python -m pytest tests -v              # fast tests
+>cmake -B build
+>cmake --build build
+```
 
-> python -m pytest tests -v --runslow    # + trajectory tests
+This creates:
 
-> jupyter notebook notebooks/tutorial.ipynb
+```text
+bin/lbm_squirmer
 ```
 
 ---
+
+## Run a simulation
+
+### Duct-flow validation
+
+```bash
+> ./bin/lbm_squirmer inputs/duct.in
+```
+
+### Neutral squirmer
+
+```bash
+> ./bin/lbm_squirmer inputs/channel_neutral.in
+```
+
+### Puller with custom parameters
+
+```bash
+> ./bin/lbm_squirmer inputs/channel_puller.in beta=2 angle=15 prefix=my_run
+```
+
+Parameters can be changed directly from the command line: `key=value`
+
+For example:
+
+```bash
+> ./bin/lbm_squirmer inputs/channel_neutral.in beta=-3 radius=6
+```
+
+### Run with OpenMP
+
+```bash
+> export OMP_NUM_THREADS=8
+> ./bin/lbm_squirmer inputs/channel_neutral.in
+```
+
+---
+
 
 ## 2. Repository layout
 
@@ -199,7 +246,7 @@ S_i^+ = w_i\left[9(\mathbf c_i\cdot\mathbf u)(\mathbf c_i\cdot\mathbf F) - 3\,\m
 S_i^- = 3w_i\,\mathbf c_i\cdot\mathbf F .
 $$
 
-### 3.4 Walls: halfway bounce-back
+### $\color{purple}{\text{3.4 Walls: halfway bounce-back}}$ 
 
 The outermost node layer in y (and optionally z) is solid. A population that would stream from a
 fluid node $\mathbf x_f$ into a solid node is reflected back:
