@@ -142,8 +142,6 @@ LBM_solver_3D/
 
 ## 3. Theory and numerical method  
 
-$\color{purple}{\text{3. Theory and numerical method}}$
-
 All quantities described in simulations are in **lattice units**: $\Delta x = \Delta t = 1$, reference density $\rho_0 = 1$.
 
 ### $\color{purple}{\text{3.1 Lattice Boltzmann equation}}$
@@ -259,11 +257,11 @@ $$
 H = N_y - 2 .
 $$
 
-### 3.5 Squirmer model
+### $\color{purple}{\text{3.5 Squirmer model}}$ 
 
-A squirmer is a rigid sphere of radius $R$ with orientation $\mathbf e$ whose surface drives the
+The squirmer model is a simplified model of swimming microswimmers in fluid. A squirmer is a rigid sphere of radius $R$ with orientation $\mathbf e$ whose surface drives the
 fluid with a prescribed tangential slip velocity (Lighthill 1952; Blake 1971). Keeping the first two
-modes, with $\cos\theta = \mathbf e\cdot\hat{\mathbf r}$:
+modes, with $\cos\theta = \mathbf e\cdot\hat{\mathbf r}$, gives the surface slip velocity as follows:
 
 $$
 \mathbf u_s(\theta) = \left(B_1\sin\theta + B_2\sin\theta\cos\theta\right)\hat{\boldsymbol\theta}
@@ -277,7 +275,7 @@ $$
 | β = 0 | **neutral** (e.g. *Volvox*) | source dipole, decays as $r^{-3}$ | — |
 | β > 0 | **puller** (e.g. *Chlamydomonas*) | fluid drawn in along the axis, expelled at the sides | thrust from the front |
 
-In unbounded Stokes flow the swimming speed is $\mathbf U_0 = \tfrac23 B_1\,\mathbf e$, independent of β,
+In unbounded Stokes flow the swimming speed is $\mathbf{U}_0 = \tfrac23 B_1 \mathbf e$, independent of β,
 and the lab-frame flow is (Blake 1971)
 
 $$
@@ -291,9 +289,9 @@ The $B_2$ term is a force dipole (stresslet) decaying as $r^{-2}$, which dominat
 interactions with walls.
 
 <p align="center"><img src="docs/figures/squirmer_model.png" width="90%"><br>
-<em>Top: analytic flow. Middle: LBM flow. Bottom: slip profile and on-axis velocity.</em></p>
+<em>Top: analytic flow fields around squirmer. Middle: LBM flow fields. Bottom: slip profile and on-axis velocity.</em></p>
 
-### 3.6 Fluid–particle coupling
+### $\color{purple}{\text{3.6 Fluid–particle coupling}}$  
 
 **Boundary condition.** Lattice nodes inside the sphere are flagged `PARTICLE`. Links from fluid
 nodes into the sphere use the bounce-back rule of §3.4 with the local surface velocity
