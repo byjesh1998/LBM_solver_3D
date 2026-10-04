@@ -8,7 +8,7 @@ model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
   <img src="docs/figures/pusher.png" width="85%"><br>
   <img src="docs/figures/puller.png" width="85%"><br>
   <img src="docs/figures/neutral.png" width="85%"><br>
-  <em>Trajectories of different squirmer between the walls of a slit channel. The orientations of squirmer are colour coded.</em>
+  <em>Trajectories of different squirmer between the walls of a slit channel; Orientations of squirmer are colour coded.</em>
 </p>
 
 **Features**
