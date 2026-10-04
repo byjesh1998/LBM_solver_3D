@@ -140,7 +140,7 @@ LBM_solver_3D/
 
 ---
 
-## $\color{purple}{\text{3. Theory and numerical method}}$
+## 3. Theory and numerical method  $\color{purple}{\text{3. Theory and numerical method}}$
 
 All quantities described in simulations are in **lattice units**: $\Delta x = \Delta t = 1$, reference density $\rho_0 = 1$.
 
