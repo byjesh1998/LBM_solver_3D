@@ -388,28 +388,29 @@ command line (`key=value`, overriding the file). Booleans accept `0/1`, `true/fa
 
 ---
 
-## 5. Output files
+## Output
 
-All files are written to `output_dir` with the chosen `prefix`.
+Simulation output is written to the selected output directory.
 
-| file | content |
-|---|---|
-| `prefix_final.vtk`, `prefix_<step>.vtk` | legacy binary VTK (structured points): `flag` (0 fluid, 1 wall, 2 particle), `density`, `velocity` |
-| `prefix_traj.dat` | columns `t X Y Z ex ey ez Ux Uy Uz Wx Wy Wz Fwall_y Fwall_z`; X is unwrapped along x |
-| `prefix_squirmer.dat` | squirmer state at the end of the run (`key value` pairs) |
-| `prefix_summary.txt` | diagnostics: mean density, wall force, total body force, L2 error, contacts |
-| `prefix_profile_y.dat`, `prefix_profile_z.dat` | centre-line profiles `coordinate u_lbm u_exact` (no squirmer) |
+For example:
 
-Python readers are in `postprocessing/lbm_post.py`: `read_vtk`, `read_traj`, `read_keyvalue`.
+```text
+outputs/
+├── run_final.vtk
+├── run_traj.dat
+├── run_squirmer.dat
+├── run_summary.txt
+├── run_profile_y.dat
+└── run_profile_z.dat
+```
 
 ---
-
 ## 6. Validation
 
 ### 6.1 Duct flow (no squirmer)
 
 Flow in a square duct driven by a body force $G$ is compared with the exact series solution for
-$-a<y<a$, $-b<z<b$ (e.g. White, *Viscous Fluid Flow*):
+$-a<y<a$, $-b<z<b$ (e.g. *Viscous Fluid Flow*):
 
 $$
 u_x(y,z) = \frac{16 a^2 G}{\mu\pi^3}\sum_{n=1,3,5,\dots}(-1)^{\frac{n-1}{2}}
@@ -419,55 +420,73 @@ $$
 
 <p align="center"><img src="docs/figures/duct_validation.png" width="85%"></p>
 
+<div align="center">
+  
 | channel width H | relative L2 error |
 |---|---|
 | 8 | 4.0 × 10⁻³ |
 | 16 | 8.8 × 10⁻⁴ |
 | 32 | 2.1 × 10⁻⁴ |
 
-The error converges at second order. At steady state the force on the walls equals the total body
-force to machine precision, and plane Poiseuille flow (walls in y only) is reproduced to round-off (L2 error 8 × 10⁻¹³, TRT with Λ = 3/16).
+</div>
 
-### 6.2 Squirmer in a periodic box
+The error converges at second order. 
 
-With R = 4 and U₀ = 0.01 (Re = 0.48) in a 40³–48³ periodic box:
 
-- A neutral squirmer swims at 0.985 U₀, in a straight line with no rotation (machine precision).
-- At this Re, pushers (β = −3) swim at 1.14 U₀ and pullers (β = +3) at 0.86 U₀, consistent with the known effect of fluid inertia.
-- The near-field flow agrees with the Blake solution to 15–25 % (relative L2 over 1.25R < r < 3R).
-  The remaining difference comes from the coarse sphere, periodic images and finite Re.
+### 6.2 Squirmer in a slit channel (H = 32, R = 4, 2R/H = 0.25, Re = 0.48)
 
-### 6.3 Squirmer in a slit channel (H = 32, R = 4, 2R/H = 0.25, Re = 0.48)
-
+<div align="center">
+  
 | swimmer | behaviour | notes |
 |---|---|---|
-| neutral, β = 0 | sustained wall-to-wall oscillation | period ≈ 7.4 H/U₀, wavelength ≈ 6.9 H, tilt ±14° |
-| puller, β = +1 | damped oscillation towards the centreline | decay rate ≈ 0.02 U₀/H, period ≈ 14 H/U₀ |
-| pusher, β = −3 | wall-to-wall motion, pressed against the walls | relies on the hard gap; sensitive to the wall model |
+| neutral, β = 0 | sustained wall-to-wall oscillation | 
+| puller, β = +1 | damped oscillation towards the centreline |
+| pusher, β = −3 | wall-to-wall motion, pressed against the walls |
+
+</div>
 
 <p align="center"><img src="docs/figures/channel_trajectories.png" width="85%"><br>
 <em>Neutral, puller and pusher trajectories (reference data, see <code>examples/reference_data/</code>).</em></p>
 
-<p align="center"><img src="docs/figures/puller_beta1_channel.png" width="85%"><br>
-<em>Puller β = +1: exponential fit of the decaying oscillation.</em></p>
-
 ---
-
 ## 7. Tests
 
+Run the fast tests with:
+
 ```bash
-python -m pytest tests -v             # fast: duct flow + bulk squirmer (~1.5 min)
-python -m pytest tests -v --runslow   # also the channel-trajectory tests (~15 min)
-make test / make test-all             # same, via make
+> python -m pytest tests -v
 ```
 
-| file | what is tested |
-|---|---|
-| `tests/test_duct_flow.py` | duct L2 error < 5×10⁻⁴; second-order convergence; wall force = body force; mass; exact plane Poiseuille; figure |
-| `tests/test_squirmer_bulk.py` | neutral swimming speed; straight swimming; pusher > neutral > puller speed; mass; near-field flow vs Blake; figure |
-| `tests/test_trajectories.py` (slow) | neutral squirmer visits both walls; puller oscillation decays; figure |
+Run all tests, including the longer trajectory tests:
 
-Figures are written to `tests/output/`.
+```bash
+> python -m pytest tests -v --runslow
+```
+
+Or:
+
+```bash
+> make test
+> make test-all
+```
+
+The tests cover:
+
+* Duct-flow accuracy
+* Second-order convergence
+* Wall force balance
+* Mass conservation
+* Plane Poiseuille flow
+* Bulk squirmer swimming
+* Pusher/puller swimming speeds
+* Near-field flow
+* Channel trajectories
+
+Test figures are written to:
+
+```text
+tests/output/
+```
 
 ---
 
@@ -484,18 +503,20 @@ trajectories. Short runs are executed live; long-time trajectories are loaded fr
 
 The physics is set by dimensionless groups; lattice values are chosen to keep the Mach number
 small and the sphere resolved.
-
+<div align="center">
+  
 | quantity | definition | typical value here |
 |---|---|---|
 | swimming Reynolds number | $Re = 2RU_0/\nu$ | 0.48 |
-| confinement | $\kappa = 2R/H$ | 0.25 |
 | squirmer parameter | $\beta = B_2/B_1$ | −3 … +3 |
 | Mach number | $Ma = U_0/c_s = \sqrt3\,U_0$ | 0.017 |
 | time unit | $H/U_0$ | 3200 steps |
 
+</div>
+
 To convert to physical units, choose a length scale $\Delta x$ (e.g. $R_{phys}/R$) and match the
-viscosity, $\Delta t = \nu_{lat}\,\Delta x^2/\nu_{phys}$. Real microswimmers have $Re \sim 10^{-4}$–$10^{-2}$;
-lower $Re$ is reached by increasing τ or decreasing $B_1$, at the cost of longer runs.
+viscosity, $\Delta t = \nu_{lat}\,\Delta x^2/\nu_{phys}$. Real microswimmers have $Re \sim 10^{-4}$ – $10^{-2}$, and to obtain 
+lower $Re$, increase $\tau$ or decrease $B_1$, at the cost of longer runs.
 
 ---
 
@@ -506,10 +527,7 @@ lower $Re$ is reached by increasing τ or decreasing $B_1$, at the cost of longe
   Check key results with a larger radius (R = 6–8) or with an explicit lubrication correction.
 - **Out-of-plane instability.** Without `planar = 1`, a swimmer started in the x-y plane may drift
   in z because small lattice asymmetries grow.
-- **Finite inertia.** Re ≈ 0.5 by default. Behaviour at Re → 0 may differ quantitatively.
-- **Explicit coupling.** Newton–Euler integration is explicit; very light particles
-  (ρ_p/ρ_f ≪ 1) can become unstable.
-- **Single squirmer**, no restart files, single-node (OpenMP) parallelism.
+- **Finite inertia.** $Re \sim 0.5 $ by default. Behaviour at $Re \to 0$ may differ quantitatively.
 
 ---
 
