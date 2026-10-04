@@ -240,8 +240,8 @@ and the lab-frame flow is (Blake 1971)
 $$
 \mathbf u(\mathbf r) =
 B_1\frac{R^3}{r^3}\left[(\mathbf e\cdot\hat{\mathbf r})\hat{\mathbf r} - \frac{\mathbf e}{3}\right]
-+ B_2\left(\frac{R^4}{r^4} - \frac{R^2}{r^2}\right)\frac{3(\mathbf e\cdot\hat{\mathbf r})^2 - 1}{2}\,\hat{\mathbf r}
-+ B_2\frac{R^4}{r^4}(\mathbf e\cdot\hat{\mathbf r})\left[(\mathbf e\cdot\hat{\mathbf r})\hat{\mathbf r} - \mathbf e\right].
++B_2\left(\frac{R^4}{r^4} - \frac{R^2}{r^2}\right)\frac{3(\mathbf e\cdot\hat{\mathbf r})^2 - 1}{2}\,\hat{\mathbf r}
++B_2\frac{R^4}{r^4}(\mathbf e\cdot\hat{\mathbf r})\left[(\mathbf e\cdot\hat{\mathbf r})\hat{\mathbf r} - \mathbf e\right].
 $$
 
 The $B_2$ term is a force dipole (stresslet) decaying as $r^{-2}$, which dominates hydrodynamic
@@ -505,9 +505,6 @@ lower $Re$ is reached by increasing τ or decreasing $B_1$, at the cost of longe
 
 ---
 
-## License
-
-Add a license of your choice (e.g. MIT) as `LICENSE` before publishing.
 
 
 
