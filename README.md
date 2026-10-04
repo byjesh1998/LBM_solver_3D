@@ -29,7 +29,7 @@ The code uses a D3Q19 lattice, TRT collision, no-slip walls, and a fully resolve
 ## Contents
 1. [Start running the simulation](#1-start-running-the-simulation)
 2. [Repository layout](#2-repository-layout)
-3. [Theory and numerical method](#3-$\color{purple}{\text{Theory and numerical method}}$)
+3. [Theory and numerical method](#-all-quantities-described-in-simulations)
 4. [Input file reference](#4-input-file-reference)
 5. [Output files](#5-output-files)
 6. [Validation](#6-validation)
@@ -147,7 +147,7 @@ LBM_solver_3D/
 
 ---
 
-## 3. $\color{purple}{\text{Theory and numerical method}}$
+## $\color{purple}{\text{3. Theory and numerical method}}$
 
 All quantities described in simulations are in **lattice units**: $\Delta x = \Delta t = 1$, reference density $\rho_0 = 1$.
 
