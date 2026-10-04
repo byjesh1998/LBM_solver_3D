@@ -1,5 +1,5 @@
 
-# lbm-squirmer
+# lbm-squirmer 
 
 A compact 3D **lattice Boltzmann (LBM)** solver for simulating a spherical microswimmer (**squirmer**) swimming in a rectangular channel.
 
