@@ -134,23 +134,23 @@ where $\Omega_i$ is the collision operator and $S_i$ external force  term. The D
 </table>
 
 
-The speed of sound is $c_s^2 = 1/3$. Density and momentum are moments of $f_i$
+The speed of sound is $c_s^2 = 1/3$. Density and momentum are moments of distribution function $f_i$
 (with a half-force correction, see 3.3):
 
 $$
 \rho = \sum_i f_i,\qquad \rho\mathbf u = \sum_i f_i\,\mathbf c_i + \tfrac12\mathbf F .
 $$
 
-The equilibrium is the second-order expansion of the Maxwell–Boltzmann distribution:
+The equilibrium distribution is chosen as the second-order expansion of the Maxwell–Boltzmann distribution:
 
 $$
-f_i^{eq} = w_i\,\rho\left[1 + \frac{\mathbf c_i\cdot\mathbf u}{c_s^2} + \frac{(\mathbf c_i\cdot\mathbf u)^2}{2c_s^4} - \frac{\mathbf u\cdot\mathbf u}{2c_s^2}\right].
+f_i^{eq} = w_i\,\rho\left[1 + \frac{\mathbf c_i\cdot\mathbf u}{c_s^2} + \frac{(\mathbf c_i\cdot\mathbf u)^2}{2c_s^4} - \frac{\mathbf u\cdot\mathbf u}{2c_s^2}\right],
 $$
 
-In the low-Mach-number limit this recovers the incompressible Navier–Stokes equations
+which come from the local equilibrium approximation and is necessary to recover Navier-Stokes equation from Boltzmann equation. In the low-Mach-number limit this recovers the incompressible Navier–Stokes equations:
 
 $$
-\nabla\cdot\mathbf u = 0,\qquad
+\nabla\cdot\mathbf u = 0, \qquad
 \rho\left(\partial_t\mathbf u + \mathbf u\cdot\nabla\mathbf u\right) = -\nabla p + \mu\nabla^2\mathbf u + \mathbf F,
 $$
 
@@ -160,13 +160,13 @@ $$
 \nu = c_s^2\left(\tau - \tfrac12\right) = \frac{\tau - 1/2}{3}.
 $$
 
-### 3.2 Two-relaxation-time (TRT) collision
+### $\color{purple}{\text{3.2 Two-relaxation-time (TRT) collision}}$ 
 
 Each population is split into symmetric and antisymmetric parts with respect to its opposite
-direction $\bar i$ ($\mathbf c_{\bar i} = -\mathbf c_i$):
+direction $\bar{i}$ ($\mathbf{c}_{\bar{i}} = -\mathbf{c}_{i}$):
 
 $$
-f_i^\pm = \tfrac12\left(f_i \pm f_{\bar i}\right),\qquad
+f_i^\pm = \tfrac12\left(f_i \pm f_{\bar{i}}\right),\qquad
 f_i^{eq,+} = w_i\rho\left[1 + \tfrac92(\mathbf c_i\cdot\mathbf u)^2 - \tfrac32 u^2\right],\qquad
 f_i^{eq,-} = 3w_i\rho\,\mathbf c_i\cdot\mathbf u ,
 $$
