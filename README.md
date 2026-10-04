@@ -298,7 +298,7 @@ nodes into the sphere use the bounce-back rule of §3.4 with the local surface v
 
 $$
 \mathbf u_b = \mathbf U + \boldsymbol\Omega\times\mathbf r_b + \mathbf u_s(\hat{\mathbf r}_b),
-\qquad \mathbf r_b = \mathbf x_f + \tfrac12\mathbf c_i - \mathbf X ,
+\qquad \text{where} \qquad \mathbf r_b = \mathbf x_f + \tfrac12\mathbf c_i - \mathbf X ,
 $$
 
 where $\mathbf X$ is the centre (minimum-image convention in periodic directions).
@@ -314,7 +314,7 @@ $$
 
 **Covering and uncovering (Aidun et al. 1998).** When the sphere moves onto a fluid node, the
 node's momentum $\sum_i f_i\mathbf c_i$ is given to the particle. When it uncovers a node, the node is
-filled with $f_i^{eq}(\bar\rho, \mathbf U + \boldsymbol\Omega\times\mathbf r)$ ($\bar\rho$: mean density of
+filled with $f_i^{eq}(\bar{\rho}, \mathbf U + \boldsymbol\Omega\times\mathbf r)$ ($\bar{\rho}$: mean density of
 the fluid neighbours), and that momentum is removed from the particle.
 
 **Rigid-body dynamics.** Explicit Newton–Euler integration each time step:
@@ -326,19 +326,18 @@ $$
 \mathbf e \leftarrow \frac{\mathbf e + \boldsymbol\Omega\times\mathbf e}{\lVert\mathbf e + \boldsymbol\Omega\times\mathbf e\rVert},
 $$
 
-with $M = \tfrac43\pi R^3\rho_p$ and $I = \tfrac25 M R^2$. With `planar = 1` the motion is restricted
-to the x-y plane ($U_z = 0$, $\boldsymbol\Omega = \Omega_z\hat{\mathbf z}$). By symmetry this is an
-exact solution of the equations of motion, but it can be unstable in 3D (see §10).
+with mass $M = \tfrac43\pi R^3\rho_p$ and moment of inertia $I = \tfrac25 M R^2$ of the squirmer. With `planar = 1`, one can restrict the motion
+to the x-y plane ($U_z = 0$, $\boldsymbol\Omega = \Omega_z\hat{\mathbf z}$). 
 
 **Mass correction.** Moving-boundary bounce-back on a staircase surface does not conserve mass
-exactly. Every `mass_correction_every` steps the deficit is redistributed isotropically,
+exactly. Every `mass_correction_every` steps calculate this correction, and the deficit is redistributed isotropically,
 $f_i \leftarrow f_i + w_i(1 - \langle\rho\rangle)$, over all fluid nodes.
 
-### 3.7 Soft wall potential
+### $\color{purple}{\text{3.7 Soft wall potential}}$   
 
 The gap between the sphere surface and the wall is only one or two lattice spacings when the
-swimmer is close, which the fluid solver cannot resolve (lubrication). A weak, smooth potential
-acting along the wall normal prevents unphysical contact. For a surface-to-wall gap $h$:
+swimmer is close, which cannot be resolved by the the fluid solver (lubrication). A weak, smooth potential
+acting along the wall normal prevents any unphysical contact. For a surface-to-wall gap $h$:
 
 $$
 V(h) = \frac{\varepsilon F_S h_c}{3}\left(1 - \frac{h}{h_c}\right)^3,\qquad
@@ -346,16 +345,16 @@ F_w(h) = -V'(h) = \varepsilon F_S\left(1 - \frac{h}{h_c}\right)^2 \quad (h < h_c
 $$
 
 and zero for $h \ge h_c$. The strength is measured in units of the Stokes drag at the swimming
-speed, $F_S = 6\pi\mu R U_0$, so ε = 0.2 means at most 20 % of that drag. The force is central, so it
-exerts no torque. As a last resort, a hard gap `hmin` is enforced: if $h < h_{min}$ the sphere is
+speed, $F_S = 6\pi\mu R U_0$, so $\varepsilon = 0.2$ means at most 20 % of that drag. The force is central, so it
+exerts no torque. Finally, a hard gap `hmin` is enforced: if $h < h_{min}$ the sphere is
 placed back at $h = h_{min}$ and its wall-normal velocity is removed. The number of such
 steps is reported as `contacts`.
 
-### 3.8 Algorithm (one time step)
+### $\color{purple}{\text{3.8 Algorithm (one time step)}}$   
 
-1. For every fluid node: compute ρ, **u**; TRT collision with forcing; push-stream each population;
+1. For every fluid node: compute $\rho$, **u**; TRT collision with forcing; streaming each population;
    on links into solids apply bounce-back and accumulate momentum exchange.
-2. Soft wall force → Newton–Euler update of **U**, **Ω**, **X**, **e** → hard gap.
+2. Newton–Euler update of **U**, **Ω**, **X**, **e**.
 3. Re-map the sphere on the lattice (covering/uncovering with momentum corrections).
 4. Every `mass_correction_every` steps: global mass correction.
 
