@@ -1,6 +1,6 @@
 # lbm-squirmer
 
-A compact 3D **lattice Boltzmann** solver (D3Q19, TRT collision) for flow in channels, with a
+A compact 3D **lattice Boltzmann** solver (D3Q19, TRT collision) for flow in rectangular channels, with a
 fully resolved, self-propelled **spherical squirmer**. It is designed to study the trajectories of
 model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
 
