@@ -360,33 +360,26 @@ steps is reported as `contacts`.
 
 ---
 
-## 4. Input file reference
+## 4. Input parameters
 
-Input files contain `key = value` lines; `#` starts a comment. The same keys are accepted on the
-command line (`key=value`, overriding the file). Booleans accept `0/1`, `true/false`, `yes/no`, `on/off`.
+Input files contain `key = value` lines. The same keys are accepted on the
+command line (`key=value`, overriding the file). Booleans accept `0/1`, `true/false`, `yes/no`, `on/off`. Some important input parameters are:
 
 | key | default | description |
 |---|---|---|
 | `nx`, `ny`, `nz` | 64, 34, 32 | grid size (includes the wall layers) |
 | `tau` | 1.0 | relaxation time, ν = (τ − ½)/3; must be > 0.5 |
-| `lambda` | 0.1875 | TRT magic parameter Λ |
-| `fx`, `fy`, `fz` | 0 | body-force density (background pressure-driven flow) |
-| `walls_y` | 1 | no-slip walls at y = 0.5 and y = ny − 1.5 |
-| `walls_z` | 0 | no-slip walls at z = 0.5 and z = nz − 1.5 |
+| `fx`| 0 | body-force density in x-direction(background pressure-driven flow) |
+| `walls_y`| 1| no-slip walls at y  directions |
 | `steps` | 10000 | number of time steps |
-| `tol` | 0 | stop when the relative change of Σu_x per `print_every` < tol (no squirmer only) |
-| `print_every` | 1000 | console output interval |
-| `traj_every` | 50 | trajectory output interval |
 | `vtk_every` | 0 | VTK snapshot interval (0: final field only) |
-| `mass_correction_every` | 10 | mass-correction interval (0: off) |
-| `output_dir`, `prefix` | `outputs`, `run` | output files are `output_dir/prefix_*` |
 | `squirmer` | 0 | enable the squirmer |
 | `radius` | 4 | squirmer radius R (≥ 4 recommended) |
 | `b1` | 0.015 | first squirming mode B₁; U₀ = 2B₁/3 (keep U₀ ≲ 0.02) |
 | `beta` | 0 | β = B₂/B₁ (< 0 pusher, > 0 puller) |
 | `rho_p` | 1 | particle/fluid density ratio |
 | `x0`, `y0`, `z0` | domain centre | initial position (−1 means centre) |
-| `angle` | 30 | initial angle from the x-axis in the x-y plane, **must satisfy \|angle\| < 45°** |
+| `angle` | 30 | initial angle from the x-axis in the x-y plane |
 | `planar` | 1 | restrict motion to the x-y plane |
 | `eps` | 0.2 | wall-potential strength (max force / F_S) |
 | `hc` | 2.0 | wall-potential range (lattice units) |
