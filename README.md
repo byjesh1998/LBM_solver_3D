@@ -112,12 +112,26 @@ velocities $\mathbf c_i$, $i = 0,\dots,18$ (D3Q19):
 $$
 f_i(\mathbf x + \mathbf c_i, t+1) = f_i(\mathbf x, t) + \Omega_i(\mathbf x,t) + S_i(\mathbf x,t).
 $$
-
+<table border="0">
+<tr>
+<td>
+  
 | group | $\mathbf c_i$ | weight $w_i$ |
 |---|---|---|
 | rest | $(0,0,0)$ | $1/3$ |
 | 6 face neighbours | $(\pm1,0,0), (0,\pm1,0), (0,0,\pm1)$ | $1/18$ |
 | 12 edge neighbours | $(\pm1,\pm1,0), (\pm1,0,\pm1), (0,\pm1,\pm1)$ | $1/36$ |
+
+ </td>
+<td>
+
+
+ <img src="docs/figures/d3q19.png" width="75%"><br>
+
+</td>
+</tr>
+</table>
+
 
 The speed of sound is $c_s^2 = 1/3$. Density and momentum are moments of $f_i$
 (with a half-force correction, see 3.3):
