@@ -432,7 +432,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
-def plot_trajectories_single(runs, ny, R, U0, title=None, path=None, cmap_name="cool"):
+def plot_trajectories_single(runs, ny, R, U0, title=None, path=None, cmap_name="hsv"):
     """Trajectories in the channel, lateral position and orientation vs time.
 
     runs: list of (traj_dict, label, color).
