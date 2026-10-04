@@ -428,39 +428,68 @@ def plot_squirmer_model(cases, R, B1, half_width=14.0, path=None):
 
 
 
-    #######
-def plot_trajectories(runs, ny, R, U0, title=None, path=None):
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.collections import LineCollection
+
+def plot_trajectories_single(runs, ny, R, U0, title=None, path=None, cmap_name="cool"):
     """Trajectories in the channel, lateral position and orientation vs time.
 
     runs: list of (traj_dict, label, color).
     """
-    import matplotlib.pyplot as plt
     H = ny - 2
     yc, ylo, yhi = 0.5 * (ny - 1), 0.5, ny - 1.5
     fig = plt.figure(figsize=(13, 3.2 + 2.6 * (len(runs) + 2)))
     gs = fig.add_gridspec(len(runs) + 2, 1, hspace=.55)
+
+    cmap = plt.get_cmap(cmap_name)
+
     for k, (tr, lab, col) in enumerate(runs):
         ax = fig.add_subplot(gs[k])
-        ax.axhspan(ylo - 3, ylo, color=".5"); ax.axhspan(yhi, yhi + 3, color=".7")
-        ax.axhline(yc, ls=":", c="k", lw=.8)
+        ax.axhspan(ylo - 3, ylo, color=".7")
+        ax.axhspan(yhi, yhi + 3, color=".7")
+        ax.axhline(yc, ls=":", c="k", lw=.9)
+
         x = tr["X"] - tr["X"][0]
-        ax.plot(x, tr["Y"], c=col, lw=3.4)
+        y = tr["Y"]
+
+        # 1. Compute orientation angle theta in radians [-pi, pi]
+        angles = np.arctan2(tr["ey"], tr["ex"])
+
+        # 2. Construct segments for LineCollection to apply continuous colormapped trajectory
+        points = np.array([x, y]).T.reshape(-1, 1, 2)
+        segments = np.concatenate([points[:-1], points[1:]], axis=1)
+
+        # Map angles [-pi, pi] to [0, 1] for normalization
+        norm_angles = (angles[:-1] + np.pi) / (2 * np.pi)
+
+        lc = LineCollection(segments, cmap=cmap, norm=plt.Normalize(0, 1), linewidth=5.4)
+        lc.set_array(norm_angles)
+        ax.add_collection(lc)
+
+        # 3. Quiver arrows for direction indicators
         j = np.linspace(0, len(x) - 1, 30).astype(int)
-        ax.quiver(x[j], tr["Y"][j], tr["ex"][j], tr["ey"][j], angles="xy", scale=10, width=.0025, color="k")
+
         ax.set(ylim=(ylo - 2, yhi + 2), xlim=(-10, x[-1] + 10), ylabel="y",
-               title=f"{lab}: trajectory (y stretched; arrows = swimming direction)")
-    ax1 = fig.add_subplot(gs[-2]); ax2 = fig.add_subplot(gs[-1], sharex=ax1)
-    for tr, lab, col in runs:
-        T = tr["t"] * U0 / H
-        ax1.plot(T, (tr["Y"] - yc) / (0.5 * H - R), c=col, label=lab)
-        ax2.plot(T, tr["angle"], c=col, label=lab)
-    for s in (-1, 1):
-        ax1.axhline(s, c=".5", ls="--", lw=.8)
-    ax1.set(ylabel=r"$(y-y_c)/(H/2-R)$", ylim=(-1.15, 1.15), title="Lateral position (±1 = touching a wall)")
-    ax2.axhline(0, c="k", lw=.6)
-    ax2.set(ylabel="orientation [deg]", xlabel=r"time $tU_0/H$", title="Swimming direction")
-    for ax in (ax1, ax2):
-        ax.grid(alpha=.3); ax.legend(fontsize=8, loc="upper right")
+               title=f"{lab}: trajectory (y stretched; color = orientation)")
+
+        # 4. Inset Polar Color Wheel Legend (top right of each plot)
+        ins_ax = ax.inset_axes([0.81, 0.55, 0.22, 0.32], projection='polar')
+
+        # Render a 2D meshgrid in polar coordinates
+        r_grid = np.linspace(0.6, 1.0, 20)
+        theta_grid = np.linspace(-np.pi, np.pi, 200)
+        T, R_mesh = np.meshgrid(theta_grid, r_grid)
+
+        # Normalize theta to [0, 1] to match the colormap spectrum
+        C_mesh = (T + np.pi) / (2 * np.pi)
+
+        ins_ax.pcolormesh(T, R_mesh, C_mesh, cmap=cmap, shading='auto', zorder=1)
+        ins_ax.set_yticklabels([])  # Hide radial labels
+        ins_ax.set_xticks(np.linspace(0, 2*np.pi, 4, endpoint=False))
+        ins_ax.set_xticklabels(['0°', '90°', '180°', '-90°'], fontsize=7)
+        ins_ax.tick_params(pad=-2)
+
     if title:
         fig.suptitle(title, fontsize=12)
     if path:
