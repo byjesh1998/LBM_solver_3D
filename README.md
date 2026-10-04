@@ -27,9 +27,7 @@ The code uses a D3Q19 lattice, TRT collision, no-slip walls, and a fully resolve
 ---
 
 ## Contents
-1. [Start running the simulation](#1-start-running-the-simulation)
-2. [Repository layout](#2-repository-layout)
-3. [Theory and numerical method](#3-theory-and-numerical-method)
+1. [`Start running the simulation`](#1-start-running-the-simulation)  2. [`Repository layout`](#2-repository-layout) 3. [`Theory and numerical method`](#3-theory-and-numerical-method)
 4. [Input file reference](#4-input-file-reference)
 5. [Output files](#5-output-files)
 6. [Validation](#6-validation)
