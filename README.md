@@ -533,6 +533,7 @@ lower $Re$, increase $\tau$ or decrease $B_1$, at the cost of longer runs.
 
 ## 11. References
 
+- N. R. Byjesh, *Confinement induced three-dimensional trajectories of microswimmers in rectangular channels*, Phys. Rev. Fluids **9**, 083302 (2024).
 - M. J. Lighthill, *On the squirming motion of nearly spherical deformable bodies through liquids at very small Reynolds numbers*, Commun. Pure Appl. Math. **5**, 109 (1952).
 - J. R. Blake, *A spherical envelope approach to ciliary propulsion*, J. Fluid Mech. **46**, 199 (1971).
 - T. Ishikawa, M. P. Simmonds, T. J. Pedley, *Hydrodynamic interaction of two swimming model micro-organisms*, J. Fluid Mech. **568**, 119 (2006).
