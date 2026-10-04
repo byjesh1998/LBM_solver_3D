@@ -23,6 +23,8 @@ model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
 - OpenMP parallel; binary VTK output for ParaView
 
 
+---
+
 ## Contents
 1. [Start running the simulation](#1-start-running-the-simulation)
 2. [Repository layout](#2-repository-layout)
@@ -45,22 +47,28 @@ tests: `Python ≥ 3.9` with `numpy`, `scipy`, `matplotlib`, `pytest` and `jupyt
 
 
 ```bash
-git clone <your-repo-url> lbm-squirmer && cd lbm-squirmer
-make                                   # builds bin/lbm_squirmer
-# or: cmake -B build && cmake --build build
+> git clone https://github.com/byjesh1998/LBM_solver_3D.git
 
-./bin/lbm_squirmer inputs/duct.in                 # duct flow validation (~10 s)
-./bin/lbm_squirmer inputs/channel_neutral.in      # neutral squirmer in a channel (~11 min on 1 core)
-./bin/lbm_squirmer inputs/channel_puller.in beta=2 angle=15 prefix=my_run   # override any parameter
+> cd LBM_solver_3D
+
+> make                                   # or: cmake -B build && cmake --build build
+# which builds bin/lbm_squirmer
+
+
+> ./bin/lbm_squirmer inputs/duct.in                 # duct flow validation 
+> ./bin/lbm_squirmer inputs/channel_neutral.in      # neutral squirmer in a channel
+> ./bin/lbm_squirmer inputs/channel_puller.in beta=2 angle=15 prefix=my_run   # override any parameter
 ```
 
-Any parameter in an input file can be overridden on the command line as `key=value`.
-Set the number of threads with `export OMP_NUM_THREADS=8`.
+Any parameter in an input file can be overridden on the command line as `key=value` where key stands for input parameters.
+To run it in parallel, set the number of threads with `export OMP_NUM_THREADS=8`.
 
 ```bash
-python -m pytest tests -v              # fast tests (~1.5 min)
-python -m pytest tests -v --runslow    # + trajectory tests (~15 min)
-jupyter notebook notebooks/tutorial.ipynb
+> python -m pytest tests -v              # fast tests
+
+> python -m pytest tests -v --runslow    # + trajectory tests
+
+> jupyter notebook notebooks/tutorial.ipynb
 ```
 
 ---
