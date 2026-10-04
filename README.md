@@ -40,8 +40,9 @@ model microswimmers (pushers, pullers, neutral swimmers) between no-slip walls.
 
 ## 1. Start running the simulation
 
-Requirements: a C++17 compiler (GCC ≥ 9 or Clang ≥ 10), optionally OpenMP. For post-processing,
-tests and the notebook you also need Python ≥ 3.9 with `numpy`, `scipy`, `matplotlib`, `pytest` and `jupyter`.
+**Requirements:** a `C++17 compiler (GCC ≥ 9 or Clang ≥ 10)`, optionally `OpenMP`. For post-processing,
+tests: `Python ≥ 3.9` with `numpy`, `scipy`, `matplotlib`, `pytest` and `jupyter`.
+
 
 ```bash
 git clone <your-repo-url> lbm-squirmer && cd lbm-squirmer
